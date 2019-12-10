@@ -1,0 +1,97 @@
+type Query {
+  people(id: ID!): People # 指定id查询people
+  films(id: ID!): Films # 指定id查询films
+  planets(id: ID!): Planets # 指定id查询planets
+  starships(id: ID!): Starships # 指定id查询starships
+  species(id: ID!): Species # 指定id查询species
+  vehicles(id: ID!): Vehicles # 指定id查询vehicles
+}
+
+type People {
+  id: ID!
+  name: String!
+  birth_year: String
+  eye_color: String
+  gender: String
+  hair_color: String
+  height: String
+  mass: String
+  skin_color: String
+  films: [Films]
+}
+
+type Films {
+  id: ID!
+  title: String!
+  episode_id: Int
+  opening_crawl: String
+  director: String
+  producer: String
+  release_date: String
+}
+
+type Planets {
+  id: ID!
+  name: String!
+  rotation_period: Int
+  orbital_period: Int
+  diameter: Int 
+  climate: String
+  gravity: String
+  terrain: String
+  surface_water: Int
+  population: Int
+  residents: [People]
+  films: [Films]
+}
+
+type Starships {
+  id: ID!
+  name: String
+  model: String
+  manufacturer: String
+  cost_in_credits: Int
+  length: Int
+  max_atmosphering_speed: String
+  crew: Int
+  passengers: Int
+  cargo_capacity: Int
+  consumables: String
+  hyperdrive_rating: String
+  MGLT: String
+  starship_class: String
+  pilots: [People]
+  films: [Films]
+}
+
+type Species {
+  id: ID!
+  name: String
+  classification: String
+  designation: String
+  average_height: Int
+  skin_colors: String
+  hair_colors: String
+  eye_colors: String
+  homeworld: Planets
+  language: String
+  people: [People]
+  films: [Films]
+}
+
+type Vehicles {
+  id: ID!
+  name: String
+  model: String
+  manufacturer: String
+  cost_in_credits: Int
+  length: Float
+  max_atmosphering_speed: Int
+  crew: Int
+  passengers: Int
+  cargo_capacity: Int
+  consumables: String
+  vehicle_class: String
+  pilots: [People]
+  films: [Films]
+}
