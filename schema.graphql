@@ -1,0 +1,107 @@
+type Query {
+  people(id: ID!): People # 指定id查询people
+  films(id: ID!): Films # 指定id查询films
+  planets(id: ID!): Planets # 指定id查询planets
+  starships(id: ID!): Starships # 指定id查询starships
+  species(id: ID!): Species # 指定id查询species
+  vehicles(id: ID!): Vehicles # 指定id查询vehicles
+}
+
+type People {
+  id: ID!
+  name: String!
+  height: String
+  mass: String
+  hair_color: String
+  skin_color: String
+  eye_color: String
+  birth_year: String
+  gender: String
+  homeworld: Planets
+  films: [Films]
+  species: [Species]
+  vehicles: [Vehicles]
+  starships: [Starships]
+}
+
+type Films {
+  id: ID!
+  title: String!
+  episode_id: Int
+  opening_crawl: String
+  director: String
+  producer: String
+  release_date: String
+  characters: [People]
+  planets: [Planets]
+  starships: [Starships]
+  vehicles: [Vehicles]
+  species: [Species]
+}
+
+type Planets {
+  id: ID!
+  name: String!
+  rotation_period: String
+  orbital_period: String
+  diameter: String 
+  climate: String
+  gravity: String
+  terrain: String
+  surface_water: String
+  population: String
+  residents: [People]
+  films: [Films]
+}
+
+type Starships {
+  id: ID!
+  name: String
+  model: String
+  manufacturer: String
+  cost_in_credits: String
+  length: String
+  max_atmosphering_speed: String
+  crew: String
+  passengers: String
+  cargo_capacity: String
+  consumables: String
+  hyperdrive_rating: String
+  MGLT: String
+  starship_class: String
+  pilots: [People]
+  films: [Films]
+}
+
+type Species {
+  id: ID!
+  name: String
+  classification: String
+  designation: String
+  average_height: String
+  skin_colors: String
+  hair_colors: String
+  eye_colors: String
+  average_lifespan: String
+  homeworld: Planets
+  language: String
+  people: [People]
+  films: [Films]
+}
+
+type Vehicles {
+  id: ID!
+  name: String
+  model: String
+  manufacturer: String
+  cost_in_credits: String
+  length: String
+  max_atmosphering_speed: String
+  crew: String
+  passengers: String
+  cargo_capacity: String
+  consumables: String
+  vehicle_class: String
+  pilots: [People]
+  films: [Films]
+}
