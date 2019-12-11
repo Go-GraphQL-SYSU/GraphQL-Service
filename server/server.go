@@ -1,13 +1,11 @@
 package main
 
 import (
+	GraphQL_Service "Go-GraphQL-SYSU/GraphQL-Service"
+	"github.com/99designs/gqlgen/handler"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/99designs/gqlgen/handler"
-	GraphQL_Service "github.com/Go-GraphQL-SYSU/GraphQL-Service"
-	"github.com/Go-GraphQL-SYSU/GraphQL-Service/service"
 )
 
 const defaultPort = "8080"
@@ -17,9 +15,8 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
-
-	http.HandleFunc("/login", service.LoginHandler)
-	http.HandleFunc("/logout", service.LogoutHandler)
+	http.HandleFunc("/login", GraphQL_Service.LoginHandler)
+	http.HandleFunc("/logout", GraphQL_Service.LogoutHandler)
 	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
 	http.Handle("/query", handler.GraphQL(GraphQL_Service.NewExecutableSchema(GraphQL_Service.Config{Resolvers: &GraphQL_Service.Resolver{}})))
 
