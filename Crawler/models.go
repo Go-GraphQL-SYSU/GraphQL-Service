@@ -1,4 +1,4 @@
-package main
+package crawler
 
 type Films struct {
 	ID           string   `json:"id"`

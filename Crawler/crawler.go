@@ -1,4 +1,4 @@
-package main
+package crawler
 
 import (
 	"encoding/json"
@@ -22,10 +22,6 @@ const (
 
 type Crawler struct {
 	client *http.Client
-}
-
-func main() {
-	ScrapAndSave()
 }
 
 // Get a crawler using the default client
