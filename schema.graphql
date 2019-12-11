@@ -10,14 +10,18 @@ type Query {
 type People {
   id: ID!
   name: String!
-  birth_year: String
-  eye_color: String
-  gender: String
-  hair_color: String
   height: String
   mass: String
+  hair_color: String
   skin_color: String
+  eye_color: String
+  birth_year: String
+  gender: String
+  homeworld: Planets
   films: [Films]
+  species: [Species]
+  vehicles: [Vehicles]
+  starships: [Starships]
 }
 
 type Films {
@@ -28,6 +32,11 @@ type Films {
   director: String
   producer: String
   release_date: String
+  characters: [People]
+  planets: [Planets]
+  starships: [Starships]
+  vehicles: [Vehicles]
+  species: [Species]
 }
 
 type Planets {
@@ -73,6 +82,7 @@ type Species {
   skin_colors: String
   hair_colors: String
   eye_colors: String
+  average_lifespan: Int
   homeworld: Planets
   language: String
   people: [People]
