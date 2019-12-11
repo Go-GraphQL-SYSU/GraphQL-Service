@@ -1,4 +1,4 @@
-package crawler
+package main
 
 import (
 	"encoding/json"
@@ -6,7 +6,6 @@ import (
 	"github.com/boltdb/bolt"
 	"log"
 	"net/http"
-	"strconv"
 	"sync"
 )
 
@@ -23,6 +22,10 @@ const (
 
 type Crawler struct {
 	client *http.Client
+}
+
+func main() {
+	ScrapAndSave()
 }
 
 // Get a crawler using the default client
@@ -244,8 +247,9 @@ func (c *Crawler) getPeopleInfo() ([]People, error) {
 	}
 
 	for key := range people {
-		people[key].ID = strconv.Itoa(key + 1)
+		people[key].ID = getIDFormUrl(people[key].Url)
 		replaceSingleOldString(&people[key].HomeWorld)
+		replaceSingleOldString(&people[key].Url)
 		replaceOldString(people[key].Starships)
 		replaceOldString(people[key].Vehicles)
 		replaceOldString(people[key].Films)
@@ -282,7 +286,8 @@ func (c *Crawler) getPlanetsInfo() ([]Planets, error) {
 	}
 
 	for key := range planets {
-		planets[key].ID = strconv.Itoa(key + 1)
+		planets[key].ID = getIDFormUrl(planets[key].Url)
+		replaceSingleOldString(&planets[key].Url)
 		replaceOldString(planets[key].Films)
 		replaceOldString(planets[key].Residents)
 	}
@@ -317,7 +322,8 @@ func (c *Crawler) getStarshipsInfo() ([]Starships, error) {
 	}
 
 	for key := range starships {
-		starships[key].ID = strconv.Itoa(key + 1)
+		starships[key].ID = getIDFormUrl(starships[key].Url)
+		replaceSingleOldString(&starships[key].Url)
 		replaceOldString(starships[key].Films)
 		replaceOldString(starships[key].Pilots)
 	}
@@ -352,7 +358,8 @@ func (c *Crawler) getFilmsInfo() ([]Films, error) {
 	}
 
 	for key := range films {
-		films[key].ID = strconv.Itoa(key + 1)
+		films[key].ID = getIDFormUrl(films[key].Url)
+		replaceSingleOldString(&films[key].Url)
 		replaceOldString(films[key].Species)
 		replaceOldString(films[key].Vehicles)
 		replaceOldString(films[key].Starships)
@@ -390,7 +397,8 @@ func (c *Crawler) getSpeciesInfo() ([]Species, error) {
 	}
 
 	for key := range species {
-		species[key].ID = strconv.Itoa(key + 1)
+		species[key].ID = getIDFormUrl(species[key].Url)
+		replaceSingleOldString(&species[key].Url)
 		replaceOldString(species[key].Films)
 		replaceOldString(species[key].People)
 	}
@@ -425,7 +433,8 @@ func (c *Crawler) getVehiclesInfo() ([]Vehicles, error) {
 	}
 
 	for key := range vehicles {
-		vehicles[key].ID = strconv.Itoa(key + 1)
+		vehicles[key].ID = getIDFormUrl(vehicles[key].Url)
+		replaceSingleOldString(&vehicles[key].Url)
 		replaceOldString(vehicles[key].Films)
 		replaceOldString(vehicles[key].Pilots)
 	}

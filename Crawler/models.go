@@ -1,7 +1,8 @@
-package crawler
+package main
 
 type Films struct {
 	ID           string   `json:"id"`
+	Url          string   `json:url`
 	Title        string   `json:"title"`
 	EpisodeID    int      `json:"episode_id"`
 	OpeningCrawl string   `json:"opening_crawl"`
@@ -17,6 +18,7 @@ type Films struct {
 
 type People struct {
 	ID        string   `json:"id"`
+	Url       string   `json:url`
 	Name      string   `json:"name"`
 	BirthYear string   `json:"birth_year"`
 	EyeColor  string   `json:"eye_color"`
@@ -34,6 +36,7 @@ type People struct {
 
 type Planets struct {
 	ID             string   `json:"id"`
+	Url            string   `json:url`
 	Name           string   `json:"name"`
 	RotationPeriod string   `json:"rotation_period"`
 	OrbitalPeriod  string   `json:"orbital_period"`
@@ -49,6 +52,7 @@ type Planets struct {
 
 type Species struct {
 	ID              string   `json:"id"`
+	Url             string   `json:url`
 	Name            string   `json:"name"`
 	Classification  string   `json:"classification"`
 	Designation     string   `json:"designation"`
@@ -65,6 +69,7 @@ type Species struct {
 
 type Starships struct {
 	ID                   string   `json:"id"`
+	Url                  string   `json:url`
 	Name                 string   `json:"name"`
 	Model                string   `json:"model"`
 	Manufacturer         string   `json:"manufacturer"`
@@ -84,6 +89,7 @@ type Starships struct {
 
 type Vehicles struct {
 	ID                   string   `json:"id"`
+	Url                  string   `json:url`
 	Name                 string   `json:"name"`
 	Model                string   `json:"model"`
 	Manufacturer         string   `json:"manufacturer"`

@@ -1,7 +1,8 @@
-package crawler
+package main
 
 import (
 	"net/url"
+	"path"
 	"strings"
 )
 
@@ -32,4 +33,9 @@ func replaceOldString(input []string) {
 	for key := range input {
 		input[key] = strings.Replace(input[key], oldString, newString, 1)
 	}
+}
+
+// Extract id from link
+func getIDFormUrl(u string) string {
+	return path.Base(u)
 }
