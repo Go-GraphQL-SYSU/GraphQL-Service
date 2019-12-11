@@ -1,4 +1,4 @@
-module Go-GraphQL-SYSU/GraphQL-Service
+module github.com/Go-GraphQL-SYSU/GraphQL-Service
 
 go 1.13
 
