@@ -42,14 +42,14 @@ type Films {
 type Planets {
   id: ID!
   name: String!
-  rotation_period: Int
-  orbital_period: Int
-  diameter: Int 
+  rotation_period: String
+  orbital_period: String
+  diameter: String 
   climate: String
   gravity: String
   terrain: String
-  surface_water: Int
-  population: Int
+  surface_water: String
+  population: String
   residents: [People]
   films: [Films]
 }
@@ -59,12 +59,12 @@ type Starships {
   name: String
   model: String
   manufacturer: String
-  cost_in_credits: Int
-  length: Int
+  cost_in_credits: String
+  length: String
   max_atmosphering_speed: String
-  crew: Int
-  passengers: Int
-  cargo_capacity: Int
+  crew: String
+  passengers: String
+  cargo_capacity: String
   consumables: String
   hyperdrive_rating: String
   MGLT: String
@@ -78,11 +78,11 @@ type Species {
   name: String
   classification: String
   designation: String
-  average_height: Int
+  average_height: String
   skin_colors: String
   hair_colors: String
   eye_colors: String
-  average_lifespan: Int
+  average_lifespan: String
   homeworld: Planets
   language: String
   people: [People]
@@ -94,12 +94,12 @@ type Vehicles {
   name: String
   model: String
   manufacturer: String
-  cost_in_credits: Int
-  length: Float
-  max_atmosphering_speed: Int
-  crew: Int
-  passengers: Int
-  cargo_capacity: Int
+  cost_in_credits: String
+  length: String
+  max_atmosphering_speed: String
+  crew: String
+  passengers: String
+  cargo_capacity: String
   consumables: String
   vehicle_class: String
   pilots: [People]
