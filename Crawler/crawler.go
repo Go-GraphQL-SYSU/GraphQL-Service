@@ -45,11 +45,11 @@ func ScrapAndSave() {
 	// It will be created if it doesn't exist.
 	db, err := bolt.Open(dbPath, dbMode, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error when open bolt database:%s\n", err)
 	}
 	defer func() {
 		if err := db.Close(); err != nil {
-			log.Fatal(err)
+			log.Printf("Error when close the database:%s\n", err)
 		}
 	}()
 
@@ -59,16 +59,20 @@ func ScrapAndSave() {
 	go func() {
 		people, err := GetCrawlerAsync(&http.Client{}).getPeopleInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl people info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range people {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (people):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, PeopleBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (people):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -77,16 +81,20 @@ func ScrapAndSave() {
 	go func() {
 		planets, err := GetCrawlerAsync(&http.Client{}).getPlanetsInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl planets info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range planets {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (planets):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, PlanetsBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (planets):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -95,16 +103,20 @@ func ScrapAndSave() {
 	go func() {
 		starships, err := GetCrawlerAsync(&http.Client{}).getStarshipsInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl starships info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range starships {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (starships):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, StarshipsBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (starships):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -113,16 +125,20 @@ func ScrapAndSave() {
 	go func() {
 		films, err := GetCrawlerAsync(&http.Client{}).getFilmsInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl films info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range films {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (films):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, FilmsBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (films):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -131,16 +147,20 @@ func ScrapAndSave() {
 	go func() {
 		species, err := GetCrawlerAsync(&http.Client{}).getSpeciesInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl species info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range species {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (species):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, SpeciesBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (species):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -149,16 +169,20 @@ func ScrapAndSave() {
 	go func() {
 		vehicles, err := GetCrawlerAsync(&http.Client{}).getVehiclesInfo()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error when crawl vehicles info:%s\n", err)
+			wg.Done()
+			return
 		}
 		for _, val := range vehicles {
 			jsonData, err := json.Marshal(val)
 			if err != nil {
-				log.Print(err)
+				log.Printf("Error when marshal json (vehicles):%s\n", err)
+				continue
 			}
 
 			if err := writeToDB(db, VehiclesBucket, val.ID, jsonData); err != nil {
-				log.Print(err)
+				log.Printf("Error when write jsondata to db (vehicles):%s\n", err)
+				continue
 			}
 		}
 		wg.Done()
@@ -171,7 +195,6 @@ func writeToDB(db *bolt.DB, bucket, key string, data []byte) error {
 	return db.Update(func(tx *bolt.Tx) error {
 		b, err := tx.CreateBucketIfNotExists([]byte(bucket))
 		if err != nil {
-			log.Print(err)
 			return err
 		}
 		return b.Put([]byte(key), data)
@@ -187,7 +210,7 @@ func (c *Crawler) requestAndSave(u string, v interface{}) error {
 	}
 	defer func() {
 		if err := res.Body.Close(); err != nil {
-			log.Fatal(err)
+			log.Printf("Error when close response:%s\n", err)
 		}
 	}()
 
