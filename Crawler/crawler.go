@@ -395,6 +395,7 @@ func (c *Crawler) getSpeciesInfo() ([]Species, error) {
 	for key := range species {
 		species[key].ID = getIDFormUrl(species[key].Url)
 		replaceSingleOldString(&species[key].Url)
+		replaceSingleOldString(&species[key].Homeworld)
 		replaceOldString(species[key].Films)
 		replaceOldString(species[key].People)
 	}
