@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"regexp"
 
-	modelsw "Go-GraphQL-SYSU/GraphQL-Service/sw"
+	modelsw "github.com/Go-GraphQL-SYSU/GraphQL-Service/sw"
 
 	"github.com/boltdb/bolt"
 )
