@@ -1,7 +1,7 @@
 package main
 
 import (
-	GraphQL_Service "Go-GraphQL-SYSU/GraphQL-Service"
+	GraphQL_Service "github.com/Go-GraphQL-SYSU/GraphQL-Service"
 	"github.com/99designs/gqlgen/handler"
 	"log"
 	"net/http"
